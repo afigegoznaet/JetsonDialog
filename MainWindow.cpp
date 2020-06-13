@@ -8,10 +8,11 @@
 #include <QJsonDocument>
 #include <QJsonObject>
 #include <QHostInfo>
+#include <QDialog>
 #include <QJsonArray>
 #include <QLineEdit>
 #include <QWidgetAction>
-#include <QWebEngineView>
+#include "WebView.hpp"
 #include <QtNetwork/QNetworkInterface>
 #include <QtNetwork/QNetworkReply>
 
@@ -295,8 +296,9 @@ MainWindow::~MainWindow() {
 }
 
 void MainWindow::on_browserButton_clicked() {
-	QWebEngineView view;
+	QDialog dlg(this);
+	WebView view(&dlg);
 	view.setUrl(QUrl("http://test.webrtc.org"));
 	view.resize(this->size());
-	view.show();
+	dlg.exec();
 }

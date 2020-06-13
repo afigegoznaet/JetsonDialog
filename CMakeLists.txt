@@ -33,12 +33,20 @@ if(ANDROID)
     main.cpp
     MainWindow.cpp
     MainWindow.hpp
+	WebPage.cpp
+	WebPage.hpp
+	WebView.cpp
+	WebView.hpp
 	MainWindow.ui
 	res.qrc
   )
 else()
   add_executable(JetsonDialog
     main.cpp
+	WebPage.cpp
+	WebPage.hpp
+	WebView.cpp
+	WebView.hpp
     MainWindow.cpp
     MainWindow.hpp
     MainWindow.ui
