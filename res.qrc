@@ -1,0 +1,21 @@
+<RCC>
+    <qresource prefix="/res">
+        <file alias="galaxy.jpg">resources/potw1930a.jpg</file>
+        <file alias="gear.png">resources/gear-1564716-1325588.png</file>
+        <file alias="0.png">resources/0.png</file>
+    </qresource>
+    <qresource prefix="/icons">
+	    <file alias="weather-few-clouds.png">resources/WeatherIcons/weather-few-clouds.png</file>
+		<file alias="weather-fog.png">resources/WeatherIcons/weather-fog.png</file>
+		<file alias="weather-haze.png">resources/WeatherIcons/weather-haze.png</file>
+		<file alias="weather-icy.png">resources/WeatherIcons/weather-icy.png</file>
+		<file alias="weather-overcast.png">resources/WeatherIcons/weather-overcast.png</file>
+		<file alias="weather-showers.png">resources/WeatherIcons/weather-showers.png</file>
+		<file alias="weather-sleet.png">resources/WeatherIcons/weather-sleet.png</file>
+		<file alias="weather-snow.png">resources/WeatherIcons/weather-snow.png</file>
+		<file alias="weather-storm.png">resources/WeatherIcons/weather-storm.png</file>
+		<file alias="weather-sunny.png">resources/WeatherIcons/weather-sunny.png</file>
+		<file alias="weather-sunny-very-few-clouds.png">resources/WeatherIcons/weather-sunny-very-few-clouds.png</file>
+		<file alias="weather-thundershower.png">resources/WeatherIcons/weather-thundershower.png</file>
+    </qresource>
+</RCC>
