@@ -56,9 +56,10 @@
 #include <QStyle>
 #include <QTimer>
 #include <QWebEngineCertificateError>
+#include <QWebEngineProfile>
 
-WebPage::WebPage(QWebEngineProfile *profile, QObject *parent)
-	: QWebEnginePage(profile, parent) {
+WebPage::WebPage(QObject *parent)
+	: QWebEnginePage(QWebEngineProfile::defaultProfile(), parent) {
 
 	connect(this, &QWebEnginePage::featurePermissionRequested, this,
 			&WebPage::handleFeaturePermissionRequested);

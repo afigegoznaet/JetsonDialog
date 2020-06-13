@@ -52,6 +52,8 @@ public:
 private slots:
 	void on_browserButton_clicked();
 
+	void on_videoButton_clicked();
+
 private:
 	Ui::MainWindow *		ui;
 	QString					formats[4];
@@ -60,6 +62,7 @@ private:
 	QNetworkAccessManager	netMan;
 	QMenu					sysMenu;
 	int						screenHeight;
+	int						screenWidth;
 	int						timeFormatIdx{0};
 };
 #endif // MAINWINDOW_HPP

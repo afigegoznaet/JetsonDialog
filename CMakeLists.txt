@@ -27,6 +27,8 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 find_package(Qt5 COMPONENTS Widgets REQUIRED)
 find_package(Qt5 COMPONENTS Network REQUIRED)
 find_package(Qt5 COMPONENTS WebEngineWidgets REQUIRED)
+find_package(Qt5 COMPONENTS MultimediaWidgets REQUIRED)
+find_package(Qt5 COMPONENTS Multimedia REQUIRED)
 
 if(ANDROID)
   add_library(JetsonDialog SHARED
@@ -54,4 +56,4 @@ else()
   )
 endif()
 
-target_link_libraries(JetsonDialog PRIVATE Qt5::Widgets Qt5::Network Qt5::WebEngineCore Qt5::WebEngineWidgets)
+target_link_libraries(JetsonDialog PRIVATE Qt5::Widgets Qt5::Network Qt5::WebEngineCore Qt5::WebEngineWidgets Qt5::MultimediaWidgets Qt5::Multimedia)

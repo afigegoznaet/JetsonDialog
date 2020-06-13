@@ -9,9 +9,13 @@
 #include <QJsonObject>
 #include <QHostInfo>
 #include <QDialog>
+#include <QCameraInfo>
+#include <QCameraViewfinder>
 #include <QJsonArray>
 #include <QLineEdit>
 #include <QWidgetAction>
+#include <QScrollArea>
+#include "WebPage.hpp"
 #include "WebView.hpp"
 #include <QtNetwork/QNetworkInterface>
 #include <QtNetwork/QNetworkReply>
@@ -22,6 +26,7 @@ MainWindow::MainWindow(QWidget *parent)
 	QScreen *screen = QGuiApplication::primaryScreen();
 	QRect	 screenGeometry = screen->geometry();
 	screenHeight = screenGeometry.height();
+	screenWidth = screenGeometry.width();
 	loadSettings();
 	initMenu();
 	initMainWindow();
@@ -296,9 +301,54 @@ MainWindow::~MainWindow() {
 }
 
 void MainWindow::on_browserButton_clicked() {
-	QDialog dlg(this);
-	WebView view(&dlg);
+	QDialog dlg;
+
+	dlg.setWindowTitle("Main Window");
+	dlg.setContextMenuPolicy(Qt::NoContextMenu);
+	dlg.setWindowFlags(Qt::FramelessWindowHint
+					   | Qt::MSWindowsFixedSizeDialogHint);
+	dlg.setWindowState(Qt::WindowFullScreen);
+
+	QScrollArea scr(&dlg);
+	WebView		view(&scr);
+	WebPage *	webPage = new WebPage(&view);
+	view.setPage(webPage);
 	view.setUrl(QUrl("http://test.webrtc.org"));
-	view.resize(this->size());
+	scr.setWidget(&view);
+	scr.setWidgetResizable(true);
+
+	dlg.setLayout(new QVBoxLayout(&dlg));
+	dlg.layout()->addWidget(&scr);
+
+	const auto closeButton = new QPushButton("Close", &dlg);
+	connect(closeButton, &QPushButton::clicked, &dlg, [&dlg] { dlg.close(); });
+
+	dlg.layout()->addWidget(closeButton);
+	// dlg.layout()->addWidget(&view);
 	dlg.exec();
+}
+
+void MainWindow::on_videoButton_clicked() {
+	QDialog dlg;
+
+	dlg.setWindowTitle("Main Window");
+	dlg.setContextMenuPolicy(Qt::NoContextMenu);
+	dlg.setWindowFlags(Qt::FramelessWindowHint
+					   | Qt::MSWindowsFixedSizeDialogHint);
+	dlg.setWindowState(Qt::WindowFullScreen);
+
+	dlg.setLayout(new QVBoxLayout(&dlg));
+	QCameraViewfinder viewFinder(this);
+	dlg.layout()->addWidget(&viewFinder);
+
+	QCamera cam(QCameraInfo::defaultCamera());
+	cam.setViewfinder(&viewFinder);
+	cam.start();
+	const auto closeButton = new QPushButton("Close", &dlg);
+	connect(closeButton, &QPushButton::clicked, &dlg, [&dlg] { dlg.close(); });
+
+	dlg.layout()->addWidget(closeButton);
+	// dlg.layout()->addWidget(&view);
+	dlg.exec();
+	// cam.stop();
 }

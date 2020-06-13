@@ -58,7 +58,7 @@ class WebPage : public QWebEnginePage {
 	Q_OBJECT
 
 public:
-	WebPage(QWebEngineProfile *profile, QObject *parent = nullptr);
+	WebPage(QObject *parent = nullptr);
 
 private slots:
 	void handleFeaturePermissionRequested(const QUrl &securityOrigin,
