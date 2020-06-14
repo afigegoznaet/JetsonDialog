@@ -63,8 +63,6 @@ WebPage::WebPage(QObject *parent)
 
 	connect(this, &QWebEnginePage::featurePermissionRequested, this,
 			&WebPage::handleFeaturePermissionRequested);
-	connect(this, &QWebEnginePage::registerProtocolHandlerRequested, this,
-			&WebPage::handleRegisterProtocolHandlerRequested);
 #if !defined(QT_NO_SSL) || QT_VERSION >= QT_VERSION_CHECK(5, 12, 0)
 	connect(this, &QWebEnginePage::selectClientCertificate, this,
 			&WebPage::handleSelectClientCertificate);
@@ -106,21 +104,6 @@ void WebPage::handleFeaturePermissionRequested(const QUrl &securityOrigin,
 		setFeaturePermission(securityOrigin, feature, PermissionDeniedByUser);
 }
 
-
-//! [registerProtocolHandlerRequested]
-void WebPage::handleRegisterProtocolHandlerRequested(
-	QWebEngineRegisterProtocolHandlerRequest request) {
-	auto answer =
-		QMessageBox::question(view()->window(), tr("Permission Request"),
-							  tr("Allow %1 to open all %2 links?")
-								  .arg(request.origin().host())
-								  .arg(request.scheme()));
-	if (answer == QMessageBox::Yes)
-		request.accept();
-	else
-		request.reject();
-}
-//! [registerProtocolHandlerRequested]
 
 #if !defined(QT_NO_SSL) || QT_VERSION >= QT_VERSION_CHECK(5, 12, 0)
 void WebPage::handleSelectClientCertificate(
