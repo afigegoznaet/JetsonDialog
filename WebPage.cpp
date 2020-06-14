@@ -63,10 +63,6 @@ WebPage::WebPage(QObject *parent)
 
 	connect(this, &QWebEnginePage::featurePermissionRequested, this,
 			&WebPage::handleFeaturePermissionRequested);
-#if !defined(QT_NO_SSL) || QT_VERSION >= QT_VERSION_CHECK(5, 12, 0)
-	connect(this, &QWebEnginePage::selectClientCertificate, this,
-			&WebPage::handleSelectClientCertificate);
-#endif
 }
 
 inline QString questionForFeature(QWebEnginePage::Feature feature) {
@@ -103,12 +99,3 @@ void WebPage::handleFeaturePermissionRequested(const QUrl &securityOrigin,
 	else
 		setFeaturePermission(securityOrigin, feature, PermissionDeniedByUser);
 }
-
-
-#if !defined(QT_NO_SSL) || QT_VERSION >= QT_VERSION_CHECK(5, 12, 0)
-void WebPage::handleSelectClientCertificate(
-	QWebEngineClientCertificateSelection selection) {
-	// Just select one.
-	selection.select(selection.certificates().at(0));
-}
-#endif

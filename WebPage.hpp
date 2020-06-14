@@ -62,11 +62,6 @@ public:
 private slots:
 	void handleFeaturePermissionRequested(const QUrl &securityOrigin,
 										  Feature	  feature);
-
-#if !defined(QT_NO_SSL) || QT_VERSION >= QT_VERSION_CHECK(5, 12, 0)
-	void handleSelectClientCertificate(
-		QWebEngineClientCertificateSelection clientCertSelection);
-#endif
 };
 
 #endif // WEBPAGE_H
