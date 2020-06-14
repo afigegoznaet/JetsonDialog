@@ -371,6 +371,7 @@ void MainWindow::on_videoButton_clicked() {
 	QCamera cam(getCamera());
 	cam.setViewfinder(&viewFinder);
 	QCameraViewfinderSettings viewfinderSettings;
+	qDebug() << camFormat;
 	viewfinderSettings.setPixelFormat(QVideoFrame::PixelFormat(camFormat++));
 
 	qDebug() << cam.supportedViewfinderPixelFormats(viewfinderSettings);
