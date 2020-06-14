@@ -21,8 +21,6 @@
 #include <QtNetwork/QNetworkReply>
 #include <iostream>
 
-int camFormat = 1;
-
 MainWindow::MainWindow(QWidget *parent)
 	: QMainWindow(parent), ui(new Ui::MainWindow), sysMenu(this) {
 	ui->setupUi(this);
@@ -295,7 +293,7 @@ void MainWindow::saveSettings() {
 void MainWindow::loadSettings() {
 	QSettings settings("Jetson", "Controller");
 	timeFormatIdx = settings.value("ClockStyle", 0).toInt();
-	city = settings.value("City", "Brasov").toString();
+	city = settings.value("City", "Singapore").toString();
 	rtcUrl = settings.value("WEBRTC", "http://test.webrtc.org").toString();
 	selCamera = settings.value("CAM", "video0").toString();
 }
@@ -370,12 +368,7 @@ void MainWindow::on_videoButton_clicked() {
 
 	QCamera cam(getCamera());
 	cam.setViewfinder(&viewFinder);
-	QCameraViewfinderSettings viewfinderSettings;
-	qDebug() << camFormat;
-	viewfinderSettings.setPixelFormat(QVideoFrame::PixelFormat(camFormat++));
 
-	qDebug() << cam.supportedViewfinderPixelFormats(viewfinderSettings);
-	cam.setViewfinderSettings(viewfinderSettings);
 	if (!cam.isAvailable()) {
 		std::cout << "Unable to start the camera\n";
 		return;

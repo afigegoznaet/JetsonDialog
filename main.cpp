@@ -22,6 +22,10 @@ int main(int argc, char *argv[]) {
 			std::cout << "Camera:\n" << args.at(1).toStdString() << '\n';
 			settings.setValue("CAM", args.at(1));
 		}
+		if (0 == args.first().compare("--city")) {
+			std::cout << "City:\n" << args.at(1).toStdString() << '\n';
+			settings.setValue("City", args.at(1));
+		}
 	}
 	std::cout << std::endl;
 	QApplication a(argc, argv);
