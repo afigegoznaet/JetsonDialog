@@ -21,6 +21,8 @@
 #include <QtNetwork/QNetworkReply>
 #include <iostream>
 
+int camFormat = 1;
+
 MainWindow::MainWindow(QWidget *parent)
 	: QMainWindow(parent), ui(new Ui::MainWindow), sysMenu(this) {
 	ui->setupUi(this);
@@ -369,7 +371,7 @@ void MainWindow::on_videoButton_clicked() {
 	QCamera cam(getCamera());
 	cam.setViewfinder(&viewFinder);
 	QCameraViewfinderSettings viewfinderSettings;
-	viewfinderSettings.setPixelFormat(QVideoFrame::Format_CameraRaw);
+	viewfinderSettings.setPixelFormat(QVideoFrame::PixelFormat(camFormat++));
 
 	qDebug() << cam.supportedViewfinderPixelFormats(viewfinderSettings);
 	cam.setViewfinderSettings(viewfinderSettings);
