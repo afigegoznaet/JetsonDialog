@@ -19,6 +19,7 @@
 #include "WebView.hpp"
 #include <QtNetwork/QNetworkInterface>
 #include <QtNetwork/QNetworkReply>
+#include <iostream>
 
 MainWindow::MainWindow(QWidget *parent)
 	: QMainWindow(parent), ui(new Ui::MainWindow), sysMenu(this) {
@@ -341,7 +342,28 @@ void MainWindow::on_videoButton_clicked() {
 	QCameraViewfinder viewFinder(this);
 	dlg.layout()->addWidget(&viewFinder);
 
-	QCamera cam(QCameraInfo::defaultCamera());
+	const auto getCamera = [] {
+		const QList<QCameraInfo> availableCameras =
+			QCameraInfo::availableCameras();
+		std::cout << "Detected " << availableCameras.count() << " cameras\n";
+		for (const QCameraInfo &cameraInfo : availableCameras) {
+			QCamera cam(cameraInfo);
+			if (cam.isAvailable()) {
+				std::cout << "Available camera: "
+						  << cameraInfo.deviceName().toStdString() << " | "
+						  << cameraInfo.description().toStdString() << '\n';
+				return cameraInfo;
+			}
+		}
+		std::cout << "Default camera: "
+				  << QCameraInfo::defaultCamera().deviceName().toStdString()
+				  << " | "
+				  << QCameraInfo::defaultCamera().description().toStdString()
+				  << '\n';
+		return QCameraInfo::defaultCamera();
+	};
+
+	QCamera cam(getCamera());
 	cam.setViewfinder(&viewFinder);
 	cam.start();
 	const auto closeButton = new QPushButton("Close", &dlg);
