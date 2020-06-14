@@ -352,7 +352,8 @@ void MainWindow::on_videoButton_clicked() {
 				std::cout << "Available camera: "
 						  << cameraInfo.deviceName().toStdString() << " | "
 						  << cameraInfo.description().toStdString() << '\n';
-				return cameraInfo;
+				if (cameraInfo.deviceName().contains("video2"))
+					return cameraInfo;
 			}
 		}
 		std::cout << "Default camera: "
