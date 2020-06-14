@@ -59,6 +59,8 @@ private:
 	QString					formats[4];
 	QHash<QString, QString> icons;
 	QString					city{"Brasov"};
+	QString					rtcUrl;
+	QString					selCamera;
 	QNetworkAccessManager	netMan;
 	QMenu					sysMenu;
 	int						screenHeight;

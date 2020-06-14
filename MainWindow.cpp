@@ -294,6 +294,8 @@ void MainWindow::loadSettings() {
 	QSettings settings("Jetson", "Controller");
 	timeFormatIdx = settings.value("ClockStyle", 0).toInt();
 	city = settings.value("City", "Brasov").toString();
+	rtcUrl = settings.value("WEBRTC", "http://test.webrtc.org").toString();
+	selCamera = settings.value("CAM", "video0").toString();
 }
 
 MainWindow::~MainWindow() {
@@ -314,7 +316,7 @@ void MainWindow::on_browserButton_clicked() {
 	WebView		view(&scr);
 	WebPage *	webPage = new WebPage(&view);
 	view.setPage(webPage);
-	view.setUrl(QUrl("http://test.webrtc.org"));
+	view.setUrl(QUrl(rtcUrl));
 	scr.setWidget(&view);
 	scr.setWidgetResizable(true);
 
@@ -342,7 +344,7 @@ void MainWindow::on_videoButton_clicked() {
 	QCameraViewfinder viewFinder(this);
 	dlg.layout()->addWidget(&viewFinder);
 
-	const auto getCamera = [] {
+	const auto getCamera = [&selCamera = selCamera] {
 		const QList<QCameraInfo> availableCameras =
 			QCameraInfo::availableCameras();
 		std::cout << "Detected " << availableCameras.count() << " cameras\n";
@@ -352,11 +354,11 @@ void MainWindow::on_videoButton_clicked() {
 				std::cout << "Available camera: "
 						  << cameraInfo.deviceName().toStdString() << " | "
 						  << cameraInfo.description().toStdString() << '\n';
-				if (cameraInfo.deviceName().contains("video2"))
+				if (cameraInfo.deviceName().contains(selCamera))
 					return cameraInfo;
 			}
 		}
-		std::cout << "Default camera: "
+		std::cout << "Using default camera: "
 				  << QCameraInfo::defaultCamera().deviceName().toStdString()
 				  << " | "
 				  << QCameraInfo::defaultCamera().description().toStdString()
