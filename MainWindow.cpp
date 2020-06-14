@@ -368,6 +368,8 @@ void MainWindow::on_videoButton_clicked() {
 
 	QCamera cam(getCamera());
 	cam.setViewfinder(&viewFinder);
+
+	qDebug() << cam.supportedViewfinderPixelFormats();
 	if (!cam.isAvailable()) {
 		std::cout << "Unable to start the camera\n";
 		return;
