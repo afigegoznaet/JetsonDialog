@@ -365,6 +365,10 @@ void MainWindow::on_videoButton_clicked() {
 
 	QCamera cam(getCamera());
 	cam.setViewfinder(&viewFinder);
+	if (!cam.isAvailable()) {
+		std::cout << "Unable to start the camera\n";
+		return;
+	}
 	cam.start();
 	const auto closeButton = new QPushButton("Close", &dlg);
 	connect(closeButton, &QPushButton::clicked, &dlg, [&dlg] { dlg.close(); });
