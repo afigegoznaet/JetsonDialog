@@ -15,8 +15,8 @@
 #include <QLineEdit>
 #include <QWidgetAction>
 #include <QScrollArea>
-#include "WebPage.hpp"
-#include "WebView.hpp"
+//#include "WebPage.hpp"
+//#include "WebView.hpp"
 #include <QtNetwork/QNetworkInterface>
 #include <QtNetwork/QNetworkReply>
 #include <iostream>
@@ -313,12 +313,12 @@ void MainWindow::on_browserButton_clicked() {
 	dlg.setWindowState(Qt::WindowFullScreen);
 
 	QScrollArea scr(&dlg);
-	WebView		view(&scr);
-	WebPage *	webPage = new WebPage(&view);
-	view.setPage(webPage);
-	view.setUrl(QUrl(rtcUrl));
-	scr.setWidget(&view);
-	scr.setWidgetResizable(true);
+	// WebView		view(&scr);
+	// WebPage *	webPage = new WebPage(&view);
+	// view.setPage(webPage);
+	// view.setUrl(QUrl(rtcUrl));
+	// scr.setWidget(&view);
+	// scr.setWidgetResizable(true);
 
 	dlg.setLayout(new QVBoxLayout(&dlg));
 	dlg.layout()->addWidget(&scr);

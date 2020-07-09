@@ -25,8 +25,8 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 #endif()
 
 find_package(Qt5 COMPONENTS Widgets REQUIRED)
-find_package(Qt5 COMPONENTS Network REQUIRED)
-find_package(Qt5 COMPONENTS WebEngineWidgets REQUIRED)
+#find_package(Qt5 COMPONENTS Network REQUIRED)
+#find_package(Qt5 COMPONENTS WebEngineWidgets REQUIRED)
 find_package(Qt5 COMPONENTS MultimediaWidgets REQUIRED)
 find_package(Qt5 COMPONENTS Multimedia REQUIRED)
 
@@ -35,20 +35,20 @@ if(ANDROID)
     main.cpp
     MainWindow.cpp
     MainWindow.hpp
-	WebPage.cpp
-	WebPage.hpp
-	WebView.cpp
-	WebView.hpp
+	#WebPage.cpp
+	#WebPage.hpp
+	#WebView.cpp
+	#WebView.hpp
 	MainWindow.ui
 	res.qrc
   )
 else()
   add_executable(JetsonDialog
     main.cpp
-	WebPage.cpp
-	WebPage.hpp
-	WebView.cpp
-	WebView.hpp
+	#WebPage.cpp
+	#WebPage.hpp
+	#WebView.cpp
+	#WebView.hpp
     MainWindow.cpp
     MainWindow.hpp
     MainWindow.ui
@@ -56,4 +56,4 @@ else()
   )
 endif()
 
-target_link_libraries(JetsonDialog PRIVATE Qt5::Widgets Qt5::Network  Qt5::WebEngineWidgets Qt5::MultimediaWidgets Qt5::Multimedia)
+target_link_libraries(JetsonDialog PRIVATE Qt5::Widgets Qt5::Network Qt5::Multimedia Qt5::MultimediaWidgets)

@@ -1,6 +1,6 @@
 #include "MainWindow.hpp"
-#include <QWebEngineProfile>
-#include <QWebEngineSettings>
+//#include <QWebEngineProfile>
+//#include <QWebEngineSettings>
 #include <QApplication>
 #include <QString>
 #include <iostream>
@@ -29,9 +29,10 @@ int main(int argc, char *argv[]) {
 	}
 	std::cout << std::endl;
 	QApplication a(argc, argv);
-
-	QWebEngineSettings::defaultSettings()->setAttribute(
-		QWebEngineSettings::PluginsEnabled, true);
+	/*
+		QWebEngineSettings::defaultSettings()->setAttribute(
+			QWebEngineSettings::PluginsEnabled, true);
+			*/
 	MainWindow w;
 	w.show();
 	return a.exec();
