@@ -56,4 +56,4 @@ else()
   )
 endif()
 
-target_link_libraries(JetsonDialog PRIVATE Qt5::Widgets Qt5::Network Qt5::WebEngineCore Qt5::WebEngineWidgets Qt5::MultimediaWidgets Qt5::Multimedia)
+target_link_libraries(JetsonDialog PRIVATE Qt5::Widgets Qt5::Network  Qt5::WebEngineWidgets Qt5::MultimediaWidgets Qt5::Multimedia)
