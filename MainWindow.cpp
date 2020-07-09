@@ -293,7 +293,7 @@ void MainWindow::saveSettings() {
 void MainWindow::loadSettings() {
 	QSettings settings("Jetson", "Controller");
 	timeFormatIdx = settings.value("ClockStyle", 0).toInt();
-	city = settings.value("City", "Singapore").toString();
+	city = settings.value("City", "Brasov").toString();
 	rtcUrl = settings.value("WEBRTC", "http://test.webrtc.org").toString();
 	selCamera = settings.value("CAM", "video0").toString();
 }
